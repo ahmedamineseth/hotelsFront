@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     password: ""
   };
 
-  constructor(private us: UserService , private router : Router, private appComponent : ConfigService ) { }
+  constructor(private us: UserService , private router : Router, private config : ConfigService ) { }
 
   ngOnInit(): void {
   }
@@ -30,14 +30,11 @@ export class LoginComponent implements OnInit {
         console.log(data)
         if (data.id > 0) {
           sessionStorage.setItem("connectedUser" , data.username ); 
-          sessionStorage.setItem("basicAuth" , "Basic " + data.password ); 
-          
-          this.appComponent.httpOptions =  {
-            headers : new HttpHeaders({
-              'Authorization' : "Basic " + data.password
+          this.config.httpOptions = {
+              headers : new HttpHeaders({
+              'Authorization' : 'Basic '+data.password
             })
           }
-
           console.log("redirection");
           this.router.navigate(['hotel'])
         }else{

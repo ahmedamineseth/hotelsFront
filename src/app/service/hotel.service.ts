@@ -10,27 +10,27 @@ import { ConfigService } from '../config.service';
   providedIn: 'root'
 })
 export class HotelService {
-  constructor( private http : HttpClient , private appComponent : ConfigService ) { }
+  constructor( private http : HttpClient , private configService : ConfigService ) { }
 
   loadHotels(){
-    return this.http.get<Hotel[]>( environment.apiUrl + "hotel" , this.appComponent.httpOptions   );
+    return this.http.get<Hotel[]>( environment.apiUrl + "hotel" , this.configService.httpOptions   );
   }
 
   addHotel( hotel : Hotel ) : Observable<Hotel> {
-    return this.http.post<Hotel>( environment.apiUrl + "hotel" , hotel , this.appComponent.httpOptions )
+    return this.http.post<Hotel>( environment.apiUrl + "hotel" , hotel , this.configService.httpOptions )
   }
 
   getHotel( id? : number ) : Observable<Hotel> {
-    return this.http.get<Hotel>( environment.apiUrl  + "hotel/"+id  , this.appComponent.httpOptions );
+    return this.http.get<Hotel>( environment.apiUrl  + "hotel/"+id  , this.configService.httpOptions );
   }
 
 
   editHotel( Hotel : Hotel ) : Observable<Hotel> {
-    return this.http.put<Hotel>( environment.apiUrl + "hotel/"+Hotel.id, Hotel , this.appComponent.httpOptions  )
+    return this.http.put<Hotel>( environment.apiUrl + "hotel/"+Hotel.id, Hotel , this.configService.httpOptions  )
   }
 
   deleteHotel( id? : number ) : Observable<any> {
-    return this.http.delete( environment.apiUrl + "hotel/"+id  , this.appComponent.httpOptions  )
+    return this.http.delete( environment.apiUrl + "hotel/"+id  , this.configService.httpOptions  )
   }
 
 }

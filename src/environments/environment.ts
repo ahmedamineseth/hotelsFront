@@ -4,22 +4,9 @@
 
 import { HttpHeaders } from "@angular/common/http";
 
-let basicAuth = ""
-
-try{
-  basicAuth = sessionStorage.get('basicAuth')
-}catch( e ){
-
-}
-
 export const environment = {
   production: false,
   apiUrl : "http://localhost:8080/api/",
-  httpOptions : {
-      headers : new HttpHeaders({
-      'Authorization' : 'Basic '+  basicAuth
-    })
-  }
 };
 
 /*
